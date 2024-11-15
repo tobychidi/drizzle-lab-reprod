@@ -1,0 +1,40 @@
+### Welcome Message
+GET http://localhost:3000
+
+### List all users
+GET http://localhost:3000/users
+
+### Create a new user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "role": "user"
+}
+
+### List all posts
+GET http://localhost:3000/posts
+
+### Create a new post
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+  "title": "Test Post",
+  "content": "This is a test post content",
+  "authorId": 1
+}
+
+### Get post by ID
+GET http://localhost:3000/posts/1
+
+### Update post
+PATCH http://localhost:3000/posts/1
+Content-Type: application/json
+
+{
+  "title": "Updated Test Post",
+  "content": "This is an updated test post content"
+}

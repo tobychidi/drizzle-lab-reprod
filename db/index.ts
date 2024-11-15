@@ -7,6 +7,7 @@ export const db = drizzle({
    schema,
    casing: dbDataCasing,
    // logger: true,
+   
 });
 
 // types

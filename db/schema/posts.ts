@@ -1,15 +1,36 @@
-import { pgEnum, pgTable, serial, text, timestamp, integer } from 'drizzle-orm/pg-core';
-import { statusEnum } from './users';
+import {
+  pgEnum,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+  integer,
+  index,
+} from "drizzle-orm/pg-core";
+import { statusEnum, users } from ".";
 
-export const postCategoryEnum = pgEnum('post_category', ['news', 'tutorial', 'review', 'other']);
+export const postCategoryEnum = pgEnum("post_category", [
+  "news",
+  "tutorial",
+  "review",
+  "other",
+]);
 
-export const posts = pgTable('posts', {
-  id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  content: text('content').notNull(),
-  authorId: integer('author_id').notNull(),
-  status: statusEnum('status').default('active').notNull(),
-  category: postCategoryEnum('category').default('other').notNull(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
-});
+export const posts = pgTable(
+  "posts",
+  {
+    id: serial().primaryKey(),
+    title: text().notNull(),
+    content: text().notNull(),
+    authorId: integer()
+      .references(() => users.id)
+      .notNull(),
+    status: statusEnum().default("active").notNull(),
+    createdAt: timestamp().defaultNow().notNull(),
+    updatedAt: timestamp().defaultNow().notNull(),
+  },
+  (table) => [
+    index("author_idx").on(table.authorId),
+    index("post_status_idx").on(table.status),
+  ]
+);
