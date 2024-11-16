@@ -20,7 +20,7 @@ export const posts = pgTable(
   "posts",
   {
     id: serial().primaryKey(),
-    title: text().notNull(),
+    title: text().notNull(), //previously text("title").notNull(),
     content: text().notNull(),
     authorId: integer()
       .references(() => users.id)
