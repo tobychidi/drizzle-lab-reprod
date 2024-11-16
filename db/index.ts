@@ -6,10 +6,11 @@ export const db = drizzle({
    connection: dbConnectionString!,
    schema,
    casing: dbDataCasing,
-   // logger: true,
+   // logger: true, 
    
 });
 
 // types
 export type DbClient = typeof db;
 export * from './schema';
+
